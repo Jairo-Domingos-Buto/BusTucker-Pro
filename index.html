@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Trucker Pro | Transporte Simples, Seguro e Inteligente</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5D5CDE;
+            --secondary: #4CAF50;
+            --dark-blue: #2c3e50;
+            --light-blue: #3498db;
+            --text-light: #f8f9fa;
+            --text-dark: #343a40;
+            --bg-light: #ffffff;
+            --bg-dark: #181818;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .bg-theme {
+                background-color: var(--bg-dark);
+                color: var(--text-light);
+            }
+            .card-theme {
+                background-color: #2d2d2d;
+                color: var(--text-light);
+            }
+            .border-theme {
+                border-color: #444;
+            }
+        }
+        
+        @media (prefers-color-scheme: light) {
+            .bg-theme {
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+            }
+            .card-theme {
+                background-color: #f8f9fa;
+                color: var(--text-dark);
+            }
+            .border-theme {
+                border-color: #eaeaea;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4b4acb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3d8b40;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-theme font-sans">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-theme z-50 shadow-md border-b border-theme">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold text-primary"><i class="fas fa-bus mr-2"></i>Bus Trucker Pro</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#intro" class="hover:text-primary transition-colors">Sobre</a>
+                <a href="#features" class="hover:text-primary transition-colors">Funcionalidades</a>
+                <a href="#benefits" class="hover:text-primary transition-colors">Benefícios</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
+                <button class="btn-primary py-2 px-4 rounded-lg font-medium"><a href="login.html">Entrar</a></button>
+            </div>
+            <button class="md:hidden text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-theme border-t border-theme">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#intro" class="hover:text-primary transition-colors py-2">Sobre</a>
+                <a href="#features" class="hover:text-primary transition-colors py-2">Funcionalidades</a>
+                <a href="#benefits" class="hover:text-primary transition-colors py-2">Benefícios</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors py-2">Depoimentos</a>
+                <button class="btn-primary py-2 px-4 rounded-lg font-medium my-2"><a href="login.html">Entrar</a></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-28 pb-16 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Bus Trucker Pro: Transporte Simples, Seguro e Inteligente
+                    </h1>
+                    <p class="text-xl mb-8 opacity-90">
+                        Conecte-se às suas rotas favoritas ou gerencie viagens como nunca antes -- uma solução completa para passageiros e condutores.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button id="discover-button" class="btn-primary text-lg py-3 px-8 rounded-lg font-medium shadow-lg">
+                           <a href="registro.html">Descubra Agora</a> 
+                        </button>
+                        <button id="learn-more-button" class="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 text-lg py-3 px-8 rounded-lg font-medium">
+                            Saiba Mais
+                        </button>
+                    </div>
+                    <p class="mt-6 text-sm opacity-80">
+                        <i class="fas fa-check-circle text-secondary mr-2"></i>Disponível na web e em breve no seu celular!
+                    </p>
+                </div>
+                <div class="md:w-1/2 animate-fade-in" id="hero-illustration">
+                    <!-- Ilustração interativa do autocarro -->
+                    <svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                        <g id="bus-animation">
+                            <rect x="100" y="180" width="400" height="80" rx="10" fill="#5D5CDE" />
+                            <rect x="130" y="140" width="340" height="40" rx="5" fill="#5D5CDE" />
+                            <rect x="140" y="260" width="60" height="20" rx="10" fill="#333" />
+                            <rect x="400" y="260" width="60" height="20" rx="10" fill="#333" />
+                            <circle cx="170" cy="270" r="25" fill="#666" />
+                            <circle cx="170" cy="270" r="15" fill="#333" />
+                            <circle cx="430" cy="270" r="25" fill="#666" />
+                            <circle cx="430" cy="270" r="15" fill="#333" />
+                            <rect x="160" y="160" width="40" height="40" rx="5" fill="#80B3FF" />
+                            <rect x="220" y="160" width="40" height="40" rx="5" fill="#80B3FF" />
+                            <rect x="280" y="160" width="40" height="40" rx="5" fill="#80B3FF" />
+                            <rect x="340" y="160" width="40" height="40" rx="5" fill="#80B3FF" />
+                            <rect x="400" y="160" width="40" height="40" rx="5" fill="#80B3FF" />
+                            <rect x="480" y="190" width="20" height="30" fill="#FF6B6B" />
+                            <text x="300" y="220" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Bus Trucker Pro</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section id="intro" class="py-16 bg-gradient-to-r from-blue-50 text-gray-800 to-green-50 dark:from-blue-900 dark:to-green-900 dark:bg-opacity-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">Por que o Bus Trucker Pro?</h2>
+                <p class="text-xl leading-relaxed mb-10">
+                    O Bus Trucker Pro é mais do que um sistema de transporte -- é a ponte entre você e suas viagens. Para passageiros, oferecemos uma maneira fácil de encontrar autocarros, reservar assentos e viajar com tranquilidade. Para condutores, entregamos ferramentas modernas para gerenciar rotas e manter tudo sob controle. Simplifique sua rotina com uma plataforma pensada para o seu dia a dia!
+                </p>
+                <div class="flex justify-center">
+                    <button id="watch-video-button" class="group flex items-center space-x-2 bg-white dark:bg-gray-800 py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+                        <span class="bg-primary text-white rounded-full w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fas fa-play text-sm"></i>
+                        </span>
+                        <span>Veja como funciona</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-theme">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tudo o que Você Precisa em um Só Lugar</h2>
+                <p class="text-xl max-w-3xl mx-auto opacity-80">
+                    Uma plataforma completa que atende tanto passageiros quanto condutores
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="feature-card card-theme p-6 rounded-xl shadow-lg border border-theme">
+                    <div class="bg-primary bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-map-marked-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Para Passageiros</h3>
+                    <p class="opacity-80 text-center">
+                        Pesquise autocarros por paragem, destino ou horário, reserve seu assento e receba atualizações em tempo real -- tudo com poucos cliques.
+                    </p>
+                </div>
+                
+                <div class="feature-card card-theme p-6 rounded-xl shadow-lg border border-theme">
+                    <div class="bg-secondary bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-tachometer-alt text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Para Condutores</h3>
+                    <p class="opacity-80 text-center">
+                        Acesse um painel intuitivo com mapas interativos, atualize paragens e se conecte com a central em tempo real para uma operação sem complicações.
+                    </p>
+                </div>
+                
+                <div class="feature-card card-theme p-6 rounded-xl shadow-lg border border-theme">
+                    <div class="bg-red-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-shield-alt text-red-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Segurança em Foco</h3>
+                    <p class="opacity-80 text-center">
+                        Login seguro com autenticação de dois fatores e dados protegidos para que você use o Bus Trucker Pro com total confiança.
+                    </p>
+                </div>
+                
+                <div class="feature-card card-theme p-6 rounded-xl shadow-lg border border-theme">
+                    <div class="bg-purple-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-globe text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Acessível a Todos</h3>
+                    <p class="opacity-80 text-center">
+                        Suporte multilíngue e uma experiência perfeita na web ou no app -- transporte ao alcance de todos.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center animate-slide-up">
+                <button id="view-all-features-button" class="btn-primary py-3 px-8 rounded-lg font-medium">
+                    Ver Todas as Funcionalidades
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-gradient-to-r from-blue-50 text-gray-800 to-green-50 dark:from-blue-900 dark:to-green-900 dark:bg-opacity-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Como o Bus Trucker Pro Transforma Sua Experiência</h2>
+                <p class="text-xl max-w-3xl mx-auto opacity-80">
+                    Com o Bus Trucker Pro, o transporte deixa de ser um problema e passa a ser uma solução.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.1s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Praticidade Total</h3>
+                        <p class="opacity-80">
+                            Encontre ou gerencie rotas rapidamente, sem complicações. Interface intuitiva que simplifica todas as operações.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Informação na Hora</h3>
+                        <p class="opacity-80">
+                            Notificações sobre horários, paragens e disponibilidade. Sempre atualizado sobre o status da sua viagem.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.3s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Mais Conforto</h3>
+                        <p class="opacity-80">
+                            Escolha seu assento e viaje como preferir. Personalize sua experiência de transporte do início ao fim.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Segurança Garantida</h3>
+                        <p class="opacity-80">
+                            Seus dados estão protegidos com tecnologia avançada. Viaje com tranquilidade sabendo que suas informações estão seguras.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-language"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Flexibilidade</h3>
+                        <p class="opacity-80">
+                            Use em qualquer lugar, em qualquer idioma. Uma plataforma verdadeiramente adaptada às suas necessidades.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Suporte Dedicado</h3>
+                        <p class="opacity-80">
+                            Conte com nossa equipe para resolver qualquer dúvida ou problema, proporcionando uma experiência sem preocupações.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-theme">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Histórias de Quem Usa o Bus Trucker Pro</h2>
+                <p class="text-xl max-w-3xl mx-auto opacity-80">
+                    Veja como nossos usuários estão transformando sua experiência de transporte
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="testimonial-card card-theme p-8 rounded-xl shadow-lg border border-theme">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white text-2xl font-bold">
+                                M
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Mariana</h3>
+                            <p class="opacity-70">Passageira</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="italic opacity-80 text-lg">
+                        "Antes, eu perdia tempo esperando autocarros sem saber quando chegariam. Agora, com o Bus Trucker Pro, reservo meu assento e recebo alertas -- é um divisor de águas!"
+                    </p>
+                </div>
+                
+                <div class="testimonial-card card-theme p-8 rounded-xl shadow-lg border border-theme">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center text-white text-2xl font-bold">
+                                P
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">Pedro</h3>
+                            <p class="opacity-70">Condutor</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="italic opacity-80 text-lg">
+                        "O mapa em tempo real e o chat com a central facilitam muito meu trabalho. O Bus Trucker Pro é o parceiro que todo condutor precisa."
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center animate-slide-up">
+                <button id="view-more-testimonials-button" class="border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 py-3 px-8 rounded-lg font-medium">
+                    Ver Mais Depoimentos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary to-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Junte-se ao Bus Trucker Pro Hoje!</h2>
+                <p class="text-xl leading-relaxed mb-10 opacity-90">
+                    Chega de complicações no transporte. Seja você um passageiro ou condutor, o Bus Trucker Pro está aqui para tornar suas viagens mais fáceis, seguras e inteligentes. Cadastre-se agora e experimente o futuro do transporte!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button id="start-free-button" class="btn-secondary text-lg py-3 px-8 rounded-lg font-medium shadow-lg">
+                        <a href="registro.html">Comece Grátis</a>
+                    </button>
+                   
+                </div>
+                <p class="mt-6 opacity-80">
+                    Sem custos iniciais -- teste e veja como o Bus Trucker Pro faz a diferença.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold mb-4"><i class="fas fa-bus mr-2"></i>Bus Trucker Pro</div>
+                    <p class="opacity-70 mb-4">
+                        Transporte inteligente para todos.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Empresa</h3>
+                    <ul class="space-y-2 opacity-70">
+                        <li><a href="#" class="hover:text-primary transition-colors">Sobre nós</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Carreiras</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Recursos</h3>
+                    <ul class="space-y-2 opacity-70">
+                        <li><a href="#" class="hover:text-primary transition-colors">Documentação</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Suporte</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Tutoriais</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">API</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2 opacity-70">
+                        <li><i class="fas fa-envelope mr-2"></i> support@Bus Trucker Pro.com</li>
+                        <li><i class="fas fa-file-alt mr-2"></i> docs.Bus Trucker Pro.com</li>
+                        <li><i class="fas fa-phone mr-2"></i> +351 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Lisboa, Portugal</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center opacity-70">
+                <p>&copy; 2023 Bus Trucker Pro. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+  
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-75" id="video-modal-overlay"></div>
+        <div class="bg-white dark:bg-gray-800 w-full max-w-3xl mx-4 rounded-lg shadow-2xl relative z-10 p-4 animate-slide-up">
+            <button id="close-video-modal" class="absolute top-4 right-4 text-white bg-gray-800 dark:bg-gray-600 hover:bg-gray-700 rounded-full w-8 h-8 flex items-center justify-center z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="aspect-w-16 aspect-h-9 bg-black rounded overflow-hidden">
+                <!-- Video placeholder with animation -->
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-blue-900 to-primary">
+                    <div class="text-center text-white p-8">
+                        <i class="fas fa-bus text-6xl mb-4 animate-bounce"></i>
+                        <h3 class="text-2xl font-bold mb-2">Bus Trucker Pro em Ação</h3>
+                        <p class="opacity-80">Um vídeo demonstrativo estaria aqui em um ambiente de produção.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-message" class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50 hidden">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-2xl mr-3"></i>
+            <div>
+                <h4 class="font-bold">Sucesso!</h4>
+                <p id="success-message-text">Sua conta foi criada com sucesso.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Registration modal
+        document.getElementById('discover-button').addEventListener('click', () => openModal('registration-modal'));
+        document.getElementById('start-free-button').addEventListener('click', () => openModal('registration-modal'));
+        document.getElementById('close-modal').addEventListener('click', () => closeModal('registration-modal'));
+        document.getElementById('modal-overlay').addEventListener('click', () => closeModal('registration-modal'));
+        
+        // Video modal
+        document.getElementById('watch-video-button').addEventListener('click', () => openModal('video-modal'));
+        document.getElementById('close-video-modal').addEventListener('click', () => closeModal('video-modal'));
+        document.getElementById('video-modal-overlay').addEventListener('click', () => closeModal('video-modal'));
+        
+        // Switch between passenger and driver tabs
+        document.getElementById('passenger-tab').addEventListener('click', function() {
+            this.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
+            this.classList.add('bg-primary', 'text-white');
+            
+            const driverTab = document.getElementById('driver-tab');
+            driverTab.classList.remove('bg-primary', 'text-white');
+            driverTab.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
+        });
+        
+        document.getElementById('driver-tab').addEventListener('click', function() {
+            this.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
+            this.classList.add('bg-primary', 'text-white');
+            
+            const passengerTab = document.getElementById('passenger-tab');
+            passengerTab.classList.remove('bg-primary', 'text-white');
+            passengerTab.classList.add('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
+        });
+        
+        // Form submission
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide modal
+            closeModal('registration-modal');
+            
+            // Show success message
+            const successMessage = document.getElementById('success-message');
+            const successMessageText = document.getElementById('success-message-text');
+            
+            const activeTab = document.getElementById('passenger-tab').classList.contains('bg-primary') ? 'Passageiro' : 'Condutor';
+            
+            successMessageText.textContent = `Sua conta de ${activeTab} foi criada com sucesso!`;
+            successMessage.classList.remove('hidden');
+            
+            // Hide success message after 4 seconds
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 4000);
+        });
+        
+        // Simple animation for the bus illustration
+        let position = 0;
+        const busAnimation = () => {
+            const bus = document.getElementById('bus-animation');
+            if (!bus) return;
+            
+            position = (position + 1) % 20;
+            bus.style.transform = `translateX(${Math.sin(position / 10) * 10}px)`;
+            requestAnimationFrame(busAnimation);
+        };
+        
+        requestAnimationFrame(busAnimation);
+        
+        // Animate elements when they come into view
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
