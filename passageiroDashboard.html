@@ -25,7 +25,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9" />
                       </svg>
-                      <span id="notification-badge" class="notification-badge hidden">0</span>
+                      <span id="notification-badge" class="notification-badge">0</span>
                   </div>
                   <div id="user-menu" class="relative">
                     <button id="user-menu-btn" class="flex items-center space-x-2 text-sm focus:outline-none">
@@ -36,7 +36,7 @@
                         </svg>
                     </button>
                     <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10">
-                        <a href="#" id="profile-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Meu Perfil</a>
+                        <a href="perfil.html" id="profile-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Meu Perfil</a>
                         <a href="#" id="history-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Histórico de Viagens</a>
                         <a href="#" id="settings-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Configurações</a>
                         <div class="border-t border-gray-200 dark:border-gray-700"></div>
@@ -55,7 +55,7 @@
          <div id="passenger-dashboard" class="">
           <div class="mb-8">
               <h1 class="text-2xl font-bold text-white dark:text-white">Olá, <span id="passenger-name">Passageiro</span></h1>
-              <p class="text-gray-600 dark:text-gray-400">Bem-vindo ao BusTracker Pro</p>
+              <p class="text-gray-400 dark:text-gray-400">Bem-vindo ao BusTracker Pro</p>
           </div>
           
           <!-- Search Section -->
@@ -64,7 +64,7 @@
               <form id="search-form" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                       <label for="current-stop" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paragem Atual</label>
-                      <select id="current-stop" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                      <select id="current-stop" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 text-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
                           <option value="">Selecione a paragem atual</option>
                           <option value="paragem1">Paragem 1 - Centro</option>
                           <option value="paragem2">Paragem 2 - Hospital</option>
@@ -75,7 +75,7 @@
                   </div>
                   <div>
                       <label for="destination" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Destino</label>
-                      <select id="destination" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                      <select id="destination" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 text-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
                           <option value="">Selecione o destino</option>
                           <option value="paragem1">Paragem 1 - Centro</option>
                           <option value="paragem2">Paragem 2 - Hospital</option>
@@ -142,6 +142,97 @@
           </div>
       </div>
 
+         <!-- Loading Indicator -->
+         <div id="loading-overlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-sm w-full">
+              <div class="flex flex-col items-center">
+                  <div class="loader"></div>
+                  <p id="loading-text" class="mt-4 text-gray-700 dark:text-gray-300">Carregando...</p>
+              </div>
+          </div>
+      </div>
+
+       <!-- Notification Panel -->
+       <div id="notification-panel" class="hidden fixed inset-0 z-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="notification-backdrop"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex">
+            <div class="relative w-screen max-w-md">
+                <div class="h-full flex flex-col bg-white dark:bg-gray-900 shadow-xl overflow-y-auto">
+                    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-medium text-gray-900 dark:text-white">Notificações</h2>
+                            <button id="close-notification-panel" class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                                <span class="sr-only">Fechar</span>
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 px-4 py-6 sm:px-6">
+                        <div id="notification-list" class="space-y-4">
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border-l-4 border-primary-color fade-in">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-primary-color" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3 w-0 flex-1">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Seu ônibus está a chegar</p>
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">O ônibus 101 chegará em aproximadamente 5 minutos na paragem Centro.</p>
+                                        <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">Agora mesmo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border-l-4 border-yellow-500 fade-in">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3 w-0 flex-1">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Atraso na rota 203</p>
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Devido ao tráfego intenso, o ônibus 203 está com atraso de 10 minutos.</p>
+                                        <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">30 minutos atrás</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border-l-4 border-green-500 fade-in">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3 w-0 flex-1">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Saldo atualizado</p>
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Seu saldo foi recarregado com sucesso. Novo saldo: 500 kz</p>
+                                        <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">2 horas atrás</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="no-notifications" class="hidden text-center py-10">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9" />
+                            </svg>
+                            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Não há notificações no momento.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                        <button id="clear-notifications" class="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+                            Limpar todas as notificações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
       </div>
     </main>
     
@@ -163,7 +254,7 @@
     </footer>
   </div>
   
-  <script src="../main.js"></script>
+  <script src="passenger-dashboard.js"></script>
   </body>
   </html>
   
