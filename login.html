@@ -113,7 +113,19 @@
     </footer>
   </div>
 
-     <script src="../main.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const userType = document.getElementById('user-type').value;
+      if (userType === 'passenger') {
+        window.location.href = 'passageiroDashboard.html';
+      } else if (userType === 'driver') {
+        window.location.href = 'condutorDashboard.html';
+      }
+    });
+  </script>
+
+  <script src="../main.js"></script>
 </body>
 
 </html>
