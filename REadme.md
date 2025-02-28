@@ -1,4 +1,4 @@
-# BusEasy
+# BusTrucker Pro
 
 Bem-vindo ao **BusTrucker Pro**, um sistema web inovador para gerenciar o transporte de autocarros de forma eficiente e organizada. Nosso objetivo é simplificar a vida de passageiros e condutores, oferecendo uma plataforma segura, prática e acessível para conectar rotas, gerenciar viagens e melhorar a experiência de transporte.
 

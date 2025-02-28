@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusTracker Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="theme-auto">
+<div id="app" class="min-h-screen flex flex-col">
+  <!-- Header/Navigation -->
+  <nav class="bg-white dark:bg-gray-900 shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+              <div class="flex items-center">
+                  <a href="#" class="logo">BusTracker Pro</a>
+              </div>
+              <div id="itensHeader" class="flex items-center">
+                  <div id="notification-btn" class="relative mr-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9" />
+                      </svg>
+                      <span id="notification-badge" class="notification-badge hidden">0</span>
+                  </div>
+                  <div id="user-menu" class="relative">
+                    <button id="user-menu-btn" class="flex items-center space-x-2 text-sm focus:outline-none">
+                        <img id="user-avatar" class="h-8 w-8 rounded-full object-cover border-2 border-primary-color" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User avatar">
+                        <span id="user-name" class="hidden sm:inline-block font-medium text-gray-700 dark:text-gray-200">Usuário</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10">
+                        <a href="#" id="profile-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Meu Perfil</a>
+                        <a href="#" id="history-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Histórico de Viagens</a>
+                        <a href="#" id="settings-link" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Configurações</a>
+                        <div class="border-t border-gray-200 dark:border-gray-700"></div>
+                        <a href="#" id="logout-btn" class="block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700">Sair</a>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          
+          <!-- Driver Dashboard -->
+          <div id="driver-dashboard" class="">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold text-white dark:text-white">Olá, <span id="driver-name">Condutor</span></h1>
+                <p class="text-gray-600 dark:text-gray-100">Painel do Condutor</p>
+            </div>
+              <!-- Bus Information -->
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Informações do Ônibus</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="bus-number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Número do Ônibus</label>
+                        <select id="bus-number" class="w-full text-gray-800 px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                            <option value="101">Ônibus 101</option>
+                            <option value="203">Ônibus 203</option>
+                            <option value="305">Ônibus 305</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="route" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rota</label>
+                        <select id="route" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md  text-gray-800 focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                            <option value="route1">Centro - Hospital - Universidade</option>
+                            <option value="route2">Estação - Shopping - Centro</option>
+                            <option value="route3">Universidade - Hospital - Estação</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Current Status -->
+                <div class="mb-6">
+                    <h3 class="text-md font-medium text-gray-800 dark:text-gray-200 mb-3">Status Atual</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="current-stop-driver" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paragem Atual</label>
+                            <select id="current-stop-driver" class="w-full  text-gray-800 px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="paragem1">Paragem 1 - Centro</option>
+                                <option value="paragem2">Paragem 2 - Hospital</option>
+                                <option value="paragem3">Paragem 3 - Universidade</option>
+                                <option value="paragem4">Paragem 4 - Shopping</option>
+                                <option value="paragem5">Paragem 5 - Estação</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="next-stop" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Próxima Paragem</label> 
+                            <select id="next-stop" class="w-full  text-gray-800 px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white">
+                                <option value="paragem1">Paragem 1 - Centro</option>
+                                <option value="paragem2">Paragem 2 - Hospital</option>
+                                <option value="paragem3">Paragem 3 - Universidade</option>
+                                <option value="paragem4">Paragem 4 - Shopping</option>
+                                <option value="paragem5">Paragem 5 - Estação</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="eta" class="block text-sm  text-gray-800 font-medium text-gray-700 dark:text-gray-300 mb-1">Tempo Estimado (min)</label>
+                            <input type="number" id="eta"  min="0" max="120" class="w-full px-3 py-2  text-gray-800 text-base border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white" value="5">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Toggle -->
+                <div class="mb-6">
+    <h3 class="text-md font-medium text-gray-800 dark:text-gray-200 mb-3">Estado do Serviço</h3>
+                    <div class="flex items-center">
+                        <label for="service-status" class="flex items-center cursor-pointer">
+                            <div class="relative">
+                                <input type="checkbox" id="service-status" class="sr-only" checked>
+                                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-0 -top-1 transition"></div>
+                            </div>
+                            <div class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
+                                <span id="status-text">Em serviço</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Passenger Counter -->
+                <div class="mb-6">
+                    <h3 class="text-md font-medium text-gray-800 dark:text-gray-200 mb-3">Contador de Passageiros</h3>
+                    <div class="flex items-center">
+                        <button id="decrement" class="px-3 py-1 rounded-l-md bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="passenger-count" class="px-4 py-1 w-16 text-center bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-t border-b border-gray-300 dark:border-gray-600">0</div>
+                        <button id="increment" class="px-3 py-1 rounded-r-md bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Update Button -->
+                <button id="update-status-btn" class="w-full primary-btn py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                    Atualizar Status
+                </button>
+            </div>
+            
+            <!-- Driver Stats -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Estatísticas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 dark:text-gray-200 mb-3">Passageiros por Hora</h3>
+                        <canvas id="passengers-chart" width="400" height="200"></canvas>
+                    </div>
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800 dark:text-gray-200 mb-3">Tempo Médio por Paragem</h3>
+                        <canvas id="time-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+
+      </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm">Sobre</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm">Ajuda</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm">Termos</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm">Privacidade</a>
+                </div>
+                <div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">© 2023 BusTracker Pro. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  </div>
+  
+  <script src="../main.js"></script>
+  </body>
+  </html>
+  
+  
