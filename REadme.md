@@ -1,12 +1,12 @@
 # BusEasy
 
-Bem-vindo ao **BusEasy**, um sistema web inovador para gerenciar o transporte de autocarros de forma eficiente e organizada. Nosso objetivo é simplificar a vida de passageiros e condutores, oferecendo uma plataforma segura, prática e acessível para conectar rotas, gerenciar viagens e melhorar a experiência de transporte.
+Bem-vindo ao **BusTrucker Pro**, um sistema web inovador para gerenciar o transporte de autocarros de forma eficiente e organizada. Nosso objetivo é simplificar a vida de passageiros e condutores, oferecendo uma plataforma segura, prática e acessível para conectar rotas, gerenciar viagens e melhorar a experiência de transporte.
 
 ---
 
 ## Visão Geral
 
-O BusEasy foi projetado para atender dois públicos principais:  
+O BusTrucker Pro foi projetado para atender dois públicos principais:  
 - **Passageiros:** Que buscam encontrar autocarros, reservar assentos e viajar com conforto e pontualidade.  
 - **Condutores:** Que precisam de ferramentas modernas para gerenciar rotas, atualizar paragens e se comunicar com a central.
 
